@@ -3,16 +3,27 @@
 :root {
   /* Base */
   --bg0: #0a0b0f;
-  --bg1: rgba(255, 255, 255, 0.06);
-  --bg2: rgba(255, 255, 255, 0.09);
   --stroke: rgba(255, 255, 255, 0.14);
   --stroke-hi: rgba(255, 255, 255, 0.22);
   --text0: rgba(255, 255, 255, 0.92);
   --text1: rgba(255, 255, 255, 0.72);
-  --text2: rgba(255, 255, 255, 0.48);
+  --text2: rgba(255, 255, 255, 0.50);
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
   --blur: 24px;
   --radius: 16px;
+
+  /* Typography scale (Apple-like: tight hierarchy, generous line-height) */
+  --fs-title: 15px;
+  --fs-body: 13px;
+  --fs-sub: 12px;
+  --fs-micro: 11px;
+
+  --lh-title: 1.25;
+  --lh-body: 1.45;
+  --lh-sub: 1.35;
+
+  --tracking-title: -0.012em;
+  --tracking-body: -0.006em;
 
   --background: var(--bg0);
   --foreground: var(--text0);
@@ -31,13 +42,67 @@ body {
 }
 
 body {
-  background: radial-gradient(1200px 800px at 20% -10%, rgba(120, 160, 255, 0.18), transparent 55%),
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(120, 160, 255, 0.18), transparent 55%),
     radial-gradient(900px 700px at 110% 10%, rgba(120, 255, 220, 0.10), transparent 60%),
     radial-gradient(900px 700px at 30% 110%, rgba(255, 120, 200, 0.10), transparent 55%),
     var(--bg0);
   color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue",
-    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* SF on macOS via system-ui; keep explicit fallback list */
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tracking-body);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+
+  /* Prefer “Apple-feel” numeric alignment for times */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Type tokens */
+.ui-title {
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tracking-title);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ui-subtitle {
+  font-size: var(--fs-sub);
+  line-height: var(--lh-sub);
+  letter-spacing: var(--tracking-body);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.ui-micro {
+  font-size: var(--fs-micro);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-body);
+  color: rgba(255, 255, 255, 0.46);
+}
+
+.ui-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Liquid Glass primitives */
@@ -71,15 +136,32 @@ body {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.04) 35%,
+    rgba(255, 255, 255, 0.05) 35%,
     rgba(255, 255, 255, 0.02)
   );
   mix-blend-mode: overlay;
   opacity: 0.55;
 }
 
+/* Subtle grain to avoid “plastic” look */
+.glass-grain {
+  position: relative;
+}
+
+.glass-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
 .pressable {
-  transition: transform 120ms ease, background 200ms ease, border-color 200ms ease, opacity 200ms ease;
+  transition: transform 120ms ease, border-color 200ms ease, opacity 200ms ease;
 }
 
 .pressable:hover {

@@ -122,10 +122,10 @@ export function WorkbenchApp() {
       sidebar={
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">Runs</div>
+            <div className="ui-title">Runs</div>
             <button
               onClick={createRun}
-              className="rounded-md border border-white/10 px-2 py-1 text-xs text-zinc-300 hover:bg-white/5"
+              className="rounded-md border border-white/10 px-2 py-1 ui-micro hover:bg-white/5"
             >
               New
             </button>
@@ -135,7 +135,7 @@ export function WorkbenchApp() {
             <input
               value={newRunTitle}
               onChange={(e) => setNewRunTitle(e.target.value)}
-              className="w-full rounded-md border border-white/10 bg-black/30 px-2 py-1 text-xs outline-none placeholder:text-zinc-600"
+              className="w-full rounded-md border border-white/10 bg-black/25 px-2 py-1 ui-micro outline-none placeholder:text-white/35"
               placeholder="run title"
             />
           </div>
@@ -149,15 +149,15 @@ export function WorkbenchApp() {
                   r.id === selectedRunId ? "bg-white/5" : ""
                 }`}
               >
-                <div className="text-sm text-zinc-100 line-clamp-2">{r.title}</div>
-                <div className="mt-1 flex items-center justify-between text-[11px] text-zinc-500">
+                <div className="ui-title line-clamp-2">{r.title}</div>
+                <div className="mt-1 flex items-center justify-between ui-micro ui-mono">
                   <span className="truncate">{r.id}</span>
                   <span className="shrink-0">{fmtTime(r.created_ts_ms)}</span>
                 </div>
               </button>
             ))}
             {runs.length === 0 ? (
-              <div className="text-xs text-zinc-500">No runs yet. Click New.</div>
+              <div className="ui-subtitle">No runs yet. Click New.</div>
             ) : null}
           </div>
         </div>
@@ -165,17 +165,17 @@ export function WorkbenchApp() {
       main={
         <div className="space-y-3">
           <div>
-            <div className="text-sm font-medium">Chat</div>
-            <div className="text-xs text-zinc-500">
+            <div className="ui-title">Chat</div>
+            <div className="ui-subtitle">
               (MVP) Chat UI is placeholder; we drive runs via the sidebar.
             </div>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-black/30 p-3 text-sm text-zinc-300">
-            Selected run: <span className="text-zinc-100">{selectedRunId ?? "(none)"}</span>
+          <div className="rounded-lg border border-white/10 bg-black/30 p-3 ui-title">
+            Selected run: <span className="ui-title">{selectedRunId ?? "(none)"}</span>
           </div>
 
-          <div className="text-xs text-zinc-500">
+          <div className="ui-subtitle">
             Next: wire a real message → LangGraph execution.
           </div>
         </div>
@@ -183,8 +183,8 @@ export function WorkbenchApp() {
       timeline={
         <div className="space-y-3">
           <div>
-            <div className="text-sm font-medium">Timeline</div>
-            <div className="text-xs text-zinc-500">Live SSE + persisted events</div>
+            <div className="ui-title">Timeline</div>
+            <div className="ui-subtitle">Live SSE + persisted events</div>
           </div>
 
           <div className="divide-y divide-white/10 overflow-hidden rounded-lg border border-white/10">
@@ -196,15 +196,15 @@ export function WorkbenchApp() {
                   e.event_id === selectedEventId ? "bg-white/5" : ""
                 }`}
               >
-                <div className="w-20 shrink-0 text-xs text-zinc-500">{fmtTime(e.ts_ms)}</div>
+                <div className="w-20 shrink-0 ui-subtitle">{fmtTime(e.ts_ms)}</div>
                 <div className="min-w-0">
-                  <div className="text-xs text-zinc-400">{e.type}</div>
-                  <div className="text-sm text-zinc-100 truncate">{e.summary}</div>
+                  <div className="ui-micro ui-mono">{e.type}</div>
+                  <div className="ui-title truncate">{e.summary}</div>
                 </div>
               </button>
             ))}
             {events.length === 0 ? (
-              <div className="p-3 text-xs text-zinc-500">No events.</div>
+              <div className="p-3 ui-subtitle">No events.</div>
             ) : null}
           </div>
         </div>
@@ -212,21 +212,21 @@ export function WorkbenchApp() {
       inspector={
         <div className="space-y-3">
           <div>
-            <div className="text-sm font-medium">Inspector</div>
-            <div className="text-xs text-zinc-500">Selected event payload</div>
+            <div className="ui-title">Inspector</div>
+            <div className="ui-subtitle">Selected event payload</div>
           </div>
 
           <div className="rounded-lg border border-white/10 bg-black/30 p-3">
             {selectedEvent ? (
               <>
-                <div className="text-xs text-zinc-400">{selectedEvent.type}</div>
-                <div className="mt-1 text-sm text-zinc-100">{selectedEvent.summary}</div>
-                <pre className="mt-3 max-h-[60vh] overflow-auto text-xs text-zinc-300">
+                <div className="ui-micro ui-mono">{selectedEvent.type}</div>
+                <div className="mt-1 ui-title">{selectedEvent.summary}</div>
+                <pre className="mt-3 max-h-[60vh] overflow-auto ui-micro">
 {JSON.stringify(selectedEvent, null, 2)}
                 </pre>
               </>
             ) : (
-              <div className="text-xs text-zinc-500">Select an event.</div>
+              <div className="ui-subtitle">Select an event.</div>
             )}
           </div>
         </div>
