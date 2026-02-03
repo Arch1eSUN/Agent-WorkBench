@@ -479,7 +479,7 @@ body::before {
     radial-gradient(900px 600px at 78% 18%, rgba(120, 170, 255, 0.14), transparent 60%),
     radial-gradient(1100px 760px at 82% 82%, rgba(255, 230, 240, 0.10), transparent 64%),
     radial-gradient(800px 520px at 20% 86%, rgba(190, 240, 255, 0.14), transparent 62%);
-  filter: blur(2px);
+  filter: blur(3px);
   opacity: 1.00;
   transform: translateZ(0);
 }
@@ -495,7 +495,7 @@ body::before {
 
 
 /* Micro noise film (helps refraction feel real without looking like a texture) */
-body::after {
+html::after {
   content: "";
   position: fixed;
   inset: -20vh -20vw;
@@ -512,7 +512,7 @@ body::after {
   transform: translateZ(0);
 }
 
-:root[data-theme="dark"] body::after {
+:root[data-theme="dark"] html::after {
   opacity: 0.16;
 }
 
@@ -534,14 +534,14 @@ body::after {
       rgba(255,255,255,0.06)
     );
   filter: blur(18px);
-  opacity: 0.10;
+  opacity: 0.14;
   mix-blend-mode: soft-light;
   animation: causticsFloat 16s ease-in-out infinite;
   transform: translateZ(0);
 }
 
 :root[data-theme="dark"] body::after {
-  opacity: 0.05;
+  opacity: 0.07;
 }
 
 
