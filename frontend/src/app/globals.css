@@ -115,6 +115,9 @@ body {
 
 /* Liquid Glass primitives (material-first) */
 .glass {
+  position: relative;
+  overflow: hidden;
+
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06));
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
@@ -123,7 +126,39 @@ body {
   -webkit-backdrop-filter: blur(var(--blur));
 }
 
+/* Liquid Glass v2: thickness rim + specular + refraction */
+.glass::before,
+.glass-subtle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06) 42%, rgba(0,0,0,0.10)),
+    radial-gradient(900px 240px at 12% 0%, rgba(255,255,255,0.28), transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.65;
+}
+
+.glass::after,
+.glass-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -1px 0 rgba(0,0,0,0.22);
+  opacity: 0.9;
+}
+
+
 .glass-subtle {
+  position: relative;
+  overflow: hidden;
+
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
   border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: var(--radius);
@@ -323,6 +358,9 @@ body {
 
 /* Light glass = material (not “white card”) */
 :root[data-theme="light"] .glass {
+  position: relative;
+  overflow: hidden;
+
   background: linear-gradient(180deg, var(--glass-top), var(--glass-bot));
   border: 1px solid var(--sep);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.10);
@@ -330,6 +368,9 @@ body {
 
 
 :root[data-theme="light"] .glass-subtle {
+  position: relative;
+  overflow: hidden;
+
   background: linear-gradient(180deg, var(--glass-sub-top), var(--glass-sub-bot));
   border: 1px solid rgba(0, 0, 0, 0.07);
 }
@@ -390,4 +431,32 @@ body {
 
 :root[data-theme="light"] .glass-grain::after {
   opacity: 0.05;
+}
+
+
+:root[data-theme="light"] .glass::before,
+:root[data-theme="light"] .glass-subtle::before {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.14) 45%, rgba(0,0,0,0.06)),
+    radial-gradient(980px 260px at 18% -10%, rgba(255,255,255,0.60), transparent 60%),
+    radial-gradient(720px 280px at 88% 82%, rgba(80, 140, 255, 0.10), transparent 62%);
+  opacity: 0.75;
+}
+
+:root[data-theme="light"] .glass::after,
+:root[data-theme="light"] .glass-subtle::after {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.38),
+    inset 0 -1px 0 rgba(0,0,0,0.10);
+}
+
+/* Contact shadow in light */
+
+
+:root[data-theme="light"] .glass,
+:root[data-theme="light"] .glass-subtle {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.70),
+    0 10px 26px rgba(0, 0, 0, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 }
