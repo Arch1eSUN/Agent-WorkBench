@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button, Input } from "@/components/ui";
 
 export default function RegisterPage() {
   return (
@@ -10,31 +11,17 @@ export default function RegisterPage() {
         <form className="mt-5 space-y-3">
           <label className="block">
             <div className="ui-micro mb-1">Email</div>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full rounded-md border border-white/10 bg-black/25 px-3 py-2 ui-micro outline-none placeholder:text-white/35"
-            />
+            <Input type="email" placeholder="you@example.com" />
           </label>
           <label className="block">
             <div className="ui-micro mb-1">Password</div>
-            <input
-              type="password"
-              placeholder="••••••••"
-              className="w-full rounded-md border border-white/10 bg-black/25 px-3 py-2 ui-micro outline-none placeholder:text-white/35"
-            />
+            <Input type="password" placeholder="••••••••" />
           </label>
 
-          <button
-            type="button"
-            className="pressable w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 ui-title"
-          >
-            Create
-          </button>
+          <Button type="button">Create</Button>
 
-          <div className="ui-micro text-white/50">
-            Already have an account?{" "}
-            <Link className="underline decoration-white/30 hover:decoration-white/60" href="/login">
+          <div className="ui-micro" style={{ color: "var(--text1)" }}>Already have an account?{" "}
+            <Link className="underline" style={{ textDecorationColor: "color-mix(in oklab, var(--text1) 35%, transparent)" }} href="/login">
               Sign in
             </Link>
           </div>
