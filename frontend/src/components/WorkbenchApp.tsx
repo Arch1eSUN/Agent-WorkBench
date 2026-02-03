@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { WorkbenchShell } from "@/components/WorkbenchShell";
 
 type RunSummary = {
@@ -48,12 +48,12 @@ export function WorkbenchApp() {
     [events, selectedEventId],
   );
 
-  async function refreshRuns() {
+  const refreshRuns = useCallback(async () => {
     const res = await fetch(`${BACKEND}/runs`, { cache: "no-store" });
     const data = (await res.json()) as { runs: RunSummary[] };
     setRuns(data.runs);
     if (!selectedRunId && data.runs[0]) setSelectedRunId(data.runs[0].id);
-  }
+  }, [selectedRunId]);
 
   async function loadEvents(runId: string) {
     const res = await fetch(`${BACKEND}/runs/${runId}/events`, { cache: "no-store" });
@@ -100,13 +100,16 @@ export function WorkbenchApp() {
   }
 
   useEffect(() => {
-    refreshRuns();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    void (async () => {
+      await refreshRuns();
+    })();
+  }, [refreshRuns]);
 
   useEffect(() => {
     if (!selectedRunId) return;
-    loadEvents(selectedRunId);
+    void (async () => {
+      await loadEvents(selectedRunId);
+    })();
     subscribe(selectedRunId);
     return () => {
       if (esRef.current) {
@@ -114,7 +117,6 @@ export function WorkbenchApp() {
         esRef.current = null;
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRunId]);
 
   return (
@@ -145,9 +147,8 @@ export function WorkbenchApp() {
               <button
                 key={r.id}
                 onClick={() => setSelectedRunId(r.id)}
-                className={`w-full rounded-lg border border-white/10 p-2 text-left hover:bg-white/5 ${
-                  r.id === selectedRunId ? "bg-white/5" : ""
-                }`}
+                data-selected={r.id === selectedRunId}
+                className="liquid-item w-full rounded-lg border border-white/10 p-2 text-left"
               >
                 <div className="ui-title line-clamp-2">{r.title}</div>
                 <div className="mt-1 flex items-center justify-between ui-micro ui-mono">
@@ -192,11 +193,10 @@ export function WorkbenchApp() {
               <button
                 key={e.event_id}
                 onClick={() => setSelectedEventId(e.event_id)}
-                className={`flex w-full items-start gap-3 p-3 text-left hover:bg-white/5 ${
-                  e.event_id === selectedEventId ? "bg-white/5" : ""
-                }`}
+                data-selected={e.event_id === selectedEventId}
+                className="liquid-item flex w-full items-start gap-3 p-3 text-left"
               >
-                <div className="w-20 shrink-0 ui-subtitle">{fmtTime(e.ts_ms)}</div>
+                <div className="w-20 shrink-0 ui-subtitle ui-mono">{fmtTime(e.ts_ms)}</div>
                 <div className="min-w-0">
                   <div className="ui-micro ui-mono">{e.type}</div>
                   <div className="ui-title truncate">{e.summary}</div>
