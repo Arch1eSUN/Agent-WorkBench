@@ -135,8 +135,9 @@ body {
   border-radius: inherit;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06) 42%, rgba(0,0,0,0.10)),
-    radial-gradient(900px 240px at 12% 0%, rgba(255,255,255,0.28), transparent 60%);
+    radial-gradient(1000px 280px at 18% -12%, rgba(255,255,255,0.34), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06) 42%, rgba(0,0,0,0.10)),
+    linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.00) 18%);
   mix-blend-mode: screen;
   opacity: 0.65;
 }
@@ -437,10 +438,11 @@ body {
 :root[data-theme="light"] .glass::before,
 :root[data-theme="light"] .glass-subtle::before {
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.14) 45%, rgba(0,0,0,0.06)),
-    radial-gradient(980px 260px at 18% -10%, rgba(255,255,255,0.60), transparent 60%),
-    radial-gradient(720px 280px at 88% 82%, rgba(80, 140, 255, 0.10), transparent 62%);
-  opacity: 0.75;
+    radial-gradient(1100px 320px at 16% -14%, rgba(255,255,255,0.72), transparent 60%),
+    radial-gradient(820px 320px at 92% 84%, rgba(80, 140, 255, 0.11), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,0.40), rgba(255,255,255,0.10) 46%, rgba(0,0,0,0.06)),
+    linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.00) 14%);
+  opacity: 0.70;
 }
 
 :root[data-theme="light"] .glass::after,
@@ -459,4 +461,31 @@ body {
     0 1px 0 rgba(255,255,255,0.70),
     0 10px 26px rgba(0, 0, 0, 0.10),
     0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Environment light blobs */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20vh -20vw;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(1200px 700px at 12% 12%, rgba(255, 255, 255, 0.22), transparent 62%),
+    radial-gradient(900px 600px at 78% 18%, rgba(120, 170, 255, 0.16), transparent 60%),
+    radial-gradient(1100px 760px at 82% 82%, rgba(255, 210, 230, 0.14), transparent 64%),
+    radial-gradient(800px 520px at 20% 86%, rgba(190, 240, 255, 0.12), transparent 62%);
+  filter: blur(2px);
+  opacity: 0.85;
+  transform: translateZ(0);
+}
+
+:root[data-theme="dark"] body::before {
+  opacity: 0.55;
+  background:
+    radial-gradient(1200px 700px at 12% 12%, rgba(255, 255, 255, 0.08), transparent 62%),
+    radial-gradient(900px 600px at 78% 18%, rgba(120, 170, 255, 0.06), transparent 60%),
+    radial-gradient(1100px 760px at 82% 82%, rgba(255, 120, 160, 0.05), transparent 64%),
+    radial-gradient(800px 520px at 20% 86%, rgba(90, 210, 255, 0.05), transparent 62%);
 }
