@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { WorkbenchShell } from "@/components/WorkbenchShell";
+import { Button, Input } from "@/components/ui";
 
 type RunSummary = {
   id: string;
@@ -125,19 +126,19 @@ export function WorkbenchApp() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="ui-title">Runs</div>
-            <button
+            <Button
+              type="button"
               onClick={createRun}
-              className="rounded-md border border-white/10 px-2 py-1 ui-micro hover:bg-white/5"
+              className="w-auto px-3 py-1.5 ui-micro"
             >
               New
-            </button>
+            </Button>
           </div>
 
           <div className="flex gap-2">
-            <input
+            <Input
               value={newRunTitle}
               onChange={(e) => setNewRunTitle(e.target.value)}
-              className="w-full rounded-md border border-white/10 bg-black/25 px-2 py-1 ui-micro outline-none placeholder:text-white/35"
               placeholder="run title"
             />
           </div>
@@ -148,7 +149,7 @@ export function WorkbenchApp() {
                 key={r.id}
                 onClick={() => setSelectedRunId(r.id)}
                 data-selected={r.id === selectedRunId}
-                className="liquid-item w-full rounded-lg border border-white/10 p-2 text-left"
+                className="liquid-item pressable w-full rounded-lg border border-white/10 p-2 text-left"
               >
                 <div className="ui-title line-clamp-2">{r.title}</div>
                 <div className="mt-1 flex items-center justify-between ui-micro ui-mono">
@@ -172,7 +173,7 @@ export function WorkbenchApp() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-black/30 p-3 ui-title">
+          <div className="glass-subtle glass-highlight glass-grain rounded-lg p-3 ui-title">
             Selected run: <span className="ui-title">{selectedRunId ?? "(none)"}</span>
           </div>
 
@@ -194,7 +195,7 @@ export function WorkbenchApp() {
                 key={e.event_id}
                 onClick={() => setSelectedEventId(e.event_id)}
                 data-selected={e.event_id === selectedEventId}
-                className="liquid-item flex w-full items-start gap-3 p-3 text-left"
+                className="liquid-item pressable flex w-full items-start gap-3 p-3 text-left"
               >
                 <div className="w-20 shrink-0 ui-subtitle ui-mono">{fmtTime(e.ts_ms)}</div>
                 <div className="min-w-0">
@@ -216,7 +217,7 @@ export function WorkbenchApp() {
             <div className="ui-subtitle">Selected event payload</div>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-black/30 p-3">
+          <div className="glass-subtle glass-highlight glass-grain rounded-lg p-3">
             {selectedEvent ? (
               <>
                 <div className="ui-micro ui-mono">{selectedEvent.type}</div>

@@ -379,3 +379,15 @@ body {
   background: rgba(255, 255, 255, 0.62);
   color: var(--text0);
 }
+
+
+:root[data-theme="light"] .liquid-item::after {
+  background:
+    radial-gradient(720px 240px at 18% 30%, rgba(255, 255, 255, 0.22), transparent 60%),
+    radial-gradient(520px 220px at 85% 70%, rgba(90, 140, 255, 0.10), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+}
+
+:root[data-theme="light"] .glass-grain::after {
+  opacity: 0.05;
+}
