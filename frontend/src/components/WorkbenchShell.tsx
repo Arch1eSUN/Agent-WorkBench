@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { GlassPresetToggle } from "@/components/ui";
 
 function TopBar() {
   return (
@@ -18,6 +19,7 @@ function TopBar() {
             <div className="flex items-center gap-2">
               <span className="kbd">⌘K</span>
               <span className="ui-micro">Quick nav</span>
+              <span className="ml-2"><GlassPresetToggle /></span>
               <span className="ml-2"><ThemeToggle /></span>
             </div>
           </div>

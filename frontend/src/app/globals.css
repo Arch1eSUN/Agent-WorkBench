@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 :root {
+  /* Glass preset (visionOS) */
+  --glass-preset: vivid;
+  --env-opacity: var(--env-opacity);
+  --env-blur: 3px;
+  --noise-opacity: var(--noise-opacity);
+  --caustics-opacity: 0.14;
+  --caustics-blur: 18px;
+  --chromatic-opacity: var(--env-opacity);
   /* Base (Dark = neutral, not blue) */
   --bg0: #0b0c0e;
 
@@ -479,8 +487,8 @@ body::before {
     radial-gradient(900px 600px at 78% 18%, rgba(120, 170, 255, 0.14), transparent 60%),
     radial-gradient(1100px 760px at 82% 82%, rgba(255, 230, 240, 0.10), transparent 64%),
     radial-gradient(800px 520px at 20% 86%, rgba(190, 240, 255, 0.14), transparent 62%);
-  filter: blur(3px);
-  opacity: 1.00;
+  filter: blur(var(--env-blur));
+  opacity: var(--env-opacity);
   transform: translateZ(0);
 }
 
@@ -507,7 +515,7 @@ html::after {
     radial-gradient(circle at 40% 80%, rgba(0,0,0,0.04) 0 1px, transparent 2px);
   background-size: 180px 180px, 220px 220px, 260px 260px;
   mix-blend-mode: overlay;
-  opacity: 0.10;
+  opacity: var(--noise-opacity);
   filter: blur(0.2px);
   transform: translateZ(0);
 }
@@ -533,8 +541,8 @@ body::after {
       rgba(190,240,255,0.05),
       rgba(255,255,255,0.06)
     );
-  filter: blur(18px);
-  opacity: 0.14;
+  filter: blur(var(--caustics-blur));
+  opacity: var(--caustics-opacity);
   mix-blend-mode: soft-light;
   animation: causticsFloat 16s ease-in-out infinite;
   transform: translateZ(0);
@@ -548,6 +556,7 @@ body::after {
 /* Chromatic hint (visionOS-style, extremely subtle) */
 .glass::before,
 .glass-subtle::before {
+  opacity: var(--chromatic-opacity);
   background:
     radial-gradient(1200px 360px at 20% -18%, rgba(255,255,255,0.38), transparent 62%),
     radial-gradient(900px 320px at 86% 88%, rgba(110,180,255,0.10), transparent 62%),
@@ -567,4 +576,39 @@ body::after {
   0% { transform: translate3d(0,0,0) scale(1); filter: blur(18px); }
   50% { transform: translate3d(1.5%, -1%, 0) scale(1.02); filter: blur(20px); }
   100% { transform: translate3d(0,0,0) scale(1); filter: blur(18px); }
+}
+
+
+/* Glass presets: set <html data-glass="soft|default|vivid"> */
+:root[data-glass="soft"] {
+  --env-opacity: 0.85;
+  --env-blur: 5px;
+  --noise-opacity: 0.06;
+  --caustics-opacity: 0.08;
+  --caustics-blur: 20px;
+  --chromatic-opacity: 0.60;
+  --blur-strong: 28px;
+  --blur-soft: 18px;
+}
+
+:root[data-glass="default"] {
+  --env-opacity: 0.95;
+  --env-blur: 3px;
+  --noise-opacity: 0.09;
+  --caustics-opacity: 0.12;
+  --caustics-blur: 18px;
+  --chromatic-opacity: 0.85;
+  --blur-strong: 32px;
+  --blur-soft: 20px;
+}
+
+:root[data-glass="vivid"] {
+  --env-opacity: 1.00;
+  --env-blur: 3px;
+  --noise-opacity: 0.10;
+  --caustics-opacity: 0.14;
+  --caustics-blur: 18px;
+  --chromatic-opacity: 1.00;
+  --blur-strong: 34px;
+  --blur-soft: 22px;
 }
