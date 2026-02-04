@@ -129,7 +129,7 @@ export function WorkbenchApp() {
             <Button
               type="button"
               onClick={createRun}
-              className="w-auto px-3 py-1.5 ui-micro"
+              className="w-full flex justify-center py-2 ui-subtitle font-medium glass-subtle hover:bg-white/5"
             >
               New
             </Button>
@@ -146,14 +146,14 @@ export function WorkbenchApp() {
           <div className="space-y-2">
             {runs.map((r) => (
               <button
-                key={r.id}
+                key=<span className="opacity-50 group-hover:opacity-100 transition-opacity">{r.id}</span>
                 onClick={() => setSelectedRunId(r.id)}
                 data-selected={r.id === selectedRunId}
-                className="liquid-item pressable w-full rounded-lg border border-white/10 p-2 text-left"
+                className="liquid-item pressable w-full rounded-xl border border-white/5 p-3 text-left transition-all hover:bg-white/5 group"
               >
                 <div className="ui-title line-clamp-2">{r.title}</div>
                 <div className="mt-1 flex items-center justify-between ui-micro ui-mono">
-                  <span className="truncate">{r.id}</span>
+                  <span className="truncate"><span className="opacity-50 group-hover:opacity-100 transition-opacity">{r.id}</span></span>
                   <span className="shrink-0">{fmtTime(r.created_ts_ms)}</span>
                 </div>
               </button>
@@ -195,7 +195,7 @@ export function WorkbenchApp() {
                 key={e.event_id}
                 onClick={() => setSelectedEventId(e.event_id)}
                 data-selected={e.event_id === selectedEventId}
-                className="liquid-item pressable flex w-full items-start gap-3 p-3 text-left"
+                className="liquid-item pressable flex w-full items-start gap-4 px-4 py-3 text-left border-b border-white/5 last:border-0 hover:bg-white/5"
               >
                 <div className="w-20 shrink-0 ui-subtitle ui-mono">{fmtTime(e.ts_ms)}</div>
                 <div className="min-w-0">

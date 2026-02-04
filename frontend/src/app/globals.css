@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 :root {
+  /* Vivid Preset Locked */
+--env-opacity: 1.00;
+  --env-blur: 3px;
+  --noise-opacity: 0.10;
+  --caustics-opacity: 0.14;
+  --caustics-blur: 18px;
+  --chromatic-opacity: 1.00;
+  --blur-strong: 34px;
+  --blur-soft: 22px;
+
   /* Glass preset (visionOS) */
   --glass-preset: vivid;
   --env-opacity: var(--env-opacity);
@@ -611,4 +621,47 @@ body::after {
   --chromatic-opacity: 1.00;
   --blur-strong: 34px;
   --blur-soft: 22px;
+}
+
+    
+/* Typography Polish */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+.ui-title {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-size: 0.9rem; /* Title refined */
+}
+
+.ui-subtitle {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: 0.8rem; /* Subtitle refined */
+  opacity: 0.8;
+}
+
+.ui-micro {
+  font-family: "SF Mono", SFMono-Regular, ui-monospace, monospace;
+  font-size: 0.7rem; /* Micro refined */
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

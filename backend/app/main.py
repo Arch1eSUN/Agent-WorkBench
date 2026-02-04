@@ -5,13 +5,14 @@ import json
 import uuid
 from typing import AsyncIterator
 
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
 from .events import CreateRunRequest, CreateRunResponse, RunEvent
 from .index import list_runs
 from .storage import append_event, now_ms, read_events
+from .runner import run_agent_simulation
 
 app = FastAPI(title="Agent Workbench Backend")
 

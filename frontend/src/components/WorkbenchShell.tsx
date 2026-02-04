@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { GlassPresetToggle } from "@/components/ui";
+
 
 function TopBar() {
   return (
@@ -19,7 +19,7 @@ function TopBar() {
             <div className="flex items-center gap-2">
               <span className="kbd">⌘K</span>
               <span className="ui-micro">Quick nav</span>
-              <span className="ml-2"><GlassPresetToggle /></span>
+              
               <span className="ml-2"><ThemeToggle /></span>
             </div>
           </div>
@@ -40,17 +40,17 @@ export function WorkbenchShell(props: {
       <TopBar />
 
       <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-4 px-4 py-4">
-        <aside className="col-span-12 md:col-span-3 lg:col-span-2">
-          <div className="glass glass-highlight glass-grain p-3">{props.sidebar}</div>
+        <aside className="col-span-12 md:col-span-3 lg:col-span-2 h-[calc(100vh-6rem)] sticky top-24">
+          <div className="glass glass-highlight glass-grain p-5 flex flex-col h-full">{props.sidebar}</div>
         </aside>
 
         <main className="col-span-12 md:col-span-6 lg:col-span-7 space-y-4">
-          <div className="glass glass-highlight glass-grain p-3">{props.main}</div>
-          <div className="glass glass-highlight glass-grain p-3">{props.timeline}</div>
+          <div className="glass glass-highlight glass-grain p-5 flex flex-col h-full">{props.main}</div>
+          <div className="glass glass-highlight glass-grain p-5 flex flex-col h-full">{props.timeline}</div>
         </main>
 
         <section className="col-span-12 md:col-span-3 lg:col-span-3">
-          <div className="glass glass-highlight glass-grain p-3">{props.inspector}</div>
+          <div className="glass glass-highlight glass-grain p-5 flex flex-col h-full">{props.inspector}</div>
         </section>
       </div>
 
